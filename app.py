@@ -1,14 +1,17 @@
 #!usr/bin/python
 
-import os
-from flask import Flask, request, send_from_directory
 import logging
+import os
+import config
+from flask import Flask, request, send_from_directory
 
-SECRET_KEY = os.urandom(64)
-DEBUG = True
-
+SECRET_KEY = config.SECRET_KEY
 app = Flask(__name__,
             static_folder="static")
+
+gunicorn_logger = logging.getLogger("gunicorn.error")
+app.logger.handlers = gunicorn_logger.handlers
+app.logger.setLevel(gunicorn_logger.level)
 
 
 @app.route("/", methods=["GET"])
@@ -21,6 +24,7 @@ def index():
     app.logger.info("Serving {} request on site index".format(request.method))
     msg = "Download files from the static directory.  \
            Usage:  http://server-ip:8000/filename.ext"
+    
     return msg
 
 
@@ -28,7 +32,7 @@ def index():
 def send_file(filename):
     """
     Expose an endpoint and serve static files
-    :param filename
+    :param path + filename
     :return file
     """
     app.logger.info("Serving {} request for file: {}".format(request.method, filename))
@@ -40,8 +44,4 @@ def send_file(filename):
 
 
 if __name__ == "__main__":   
-    app.run(
-        host="0.0.0.0",
-        port=8000,
-        debug=DEBUG
-    )
+    app.start()
