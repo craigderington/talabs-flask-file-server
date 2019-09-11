@@ -34,7 +34,7 @@ def send_file(filename):
     app.logger.info("Serving {} request for file: {}".format(request.method, filename))
 
     return send_from_directory(
-        app.static_folder,
+        app.static_folder + "/docs/",
         filename
     )
 
