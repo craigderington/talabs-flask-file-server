@@ -1,0 +1,27 @@
+{% extends "_layout.html" %}
+{% block title %}ebridge :: Flask Server{% endblock %}
+{% block content %}
+
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Flask APIs</h3>
+            </div>
+            <div class="panel-body">
+                Python3 + Flask File Server. Powered by Gunicorn.
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Static File Server</h3>
+            </div>
+            <div class="panel-body">
+                Usage: http://<server-ip-address>:8000/filename.extension
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
