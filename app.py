@@ -65,6 +65,8 @@ def login():
 def page_not_found(err):
     """
     404 error handler
+    :param err
+    :return error template
     """
     return render_template('404.html'), 404
 
@@ -73,6 +75,8 @@ def page_not_found(err):
 def internal_server_error(err):
     """
     500 error handler
+    :param err
+    :return error template
     """
     return render_template('500.html'), 500
 
