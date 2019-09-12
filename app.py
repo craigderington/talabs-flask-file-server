@@ -6,10 +6,12 @@ import config
 from flask import Flask, request, send_from_directory, render_template
 from datetime import datetime, timedelta
 
+# define app
 app = Flask(__name__,
             static_folder="static",
             template_folder="templates")
 
+# setup gunicorn logging
 gunicorn_logger = logging.getLogger("gunicorn.error")
 app.logger.handlers = gunicorn_logger.handlers
 app.logger.setLevel(gunicorn_logger.level)
@@ -50,6 +52,8 @@ def send_file(filename):
 def login():
     """
     Render the login page
+    :param none
+    :return template
     """
     return render_template(
         "login.html",
@@ -59,11 +63,17 @@ def login():
 
 @app.errorhandler(404)
 def page_not_found(err):
+    """
+    404 error handler
+    """
     return render_template('404.html'), 404
 
 
 @app.errorhandler(500)
 def internal_server_error(err):
+    """
+    500 error handler
+    """
     return render_template('500.html'), 500
 
 
