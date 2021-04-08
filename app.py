@@ -3,7 +3,7 @@
 import logging
 import os
 import config
-from flask import Flask, request, send_from_directory, render_template
+from flask import Flask, request, send_from_directory, render_template, jsonify
 from datetime import datetime, timedelta
 
 # define app
@@ -90,5 +90,5 @@ def get_date():
     return datetime.now().strftime("%c")
 
 
-if __name__ == "__main__":   
+if __name__ == "__main__":
     app.start()
